@@ -1,0 +1,44 @@
+services:
+  mosquitto:
+    image: eclipse-mosquitto:2.0
+    ports:
+      - "1883:1883"
+
+  postgres:
+    image: postgres:17
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  publisher:
+    build:
+      context: .
+      dockerfile: dockerfile.publisher
+    depends_on:
+      - mosquitto
+
+  subscriber:
+    build:
+      context: .
+      dockerfile: dockerfile.subscriber
+    depends_on:
+      - mosquitto
+      - postgres
+    environment:
+      PG_HOST: postgres
+      PG_PORT: 5432
+      PG_DB: postgres
+      PG_USER: postgres
+      PG_PASSWORD: postgres
+      TOPIC: sensor/value
+      MQTT_BROKER: mosquitto
+      MQTT_PORT: 1883
+      MQTT_KEEPALIVE: 60
+
+volumes:
+  pgdata:
