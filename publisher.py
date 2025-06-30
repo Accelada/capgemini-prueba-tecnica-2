@@ -2,9 +2,10 @@ import os
 import time
 import random
 import paho.mqtt.client as mqtt
-from dotenv import load_dotenv
 
-load_dotenv()
+# from dotenv import load_dotenv
+
+# load_dotenv()
 
 
 def on_connect(client, userdata, flags, rc):
@@ -18,7 +19,7 @@ def on_publish(client, userdata, mid):
     print(f"Message {mid} published")
 
 
-client = mqtt.Client()
+client = mqtt.Client(callback_api_version=mqtt.CallbackAPIVersion.VERSION1)
 client.on_connect = on_connect
 client.on_publish = on_publish
 client.connect(
@@ -26,6 +27,8 @@ client.connect(
     int(os.getenv("MQTT_PORT")),
     int(os.getenv("MQTT_KEEPALIVE")),
 )
+
+client.loop_start()
 
 try:
     topic = os.getenv("TOPIC")
@@ -36,4 +39,5 @@ try:
         time.sleep(interval)
 
 except KeyboardInterrupt:
+    client.loop_stop()
     client.disconnect()
