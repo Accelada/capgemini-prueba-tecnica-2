@@ -52,13 +52,13 @@ Una vez lanzados los contededores, se puede evidenciar el funcionamiento de la a
 - Ver los logs en terminal o en una interfaz gráfica como Docker Desktop (Windows).
 
 - Entrar en el container de PostgreSQL para ver si la tabla existe y los datos llegan realmente. Desde CMD:
-    `docker ps` -> para obtener el ID del container de PostgreSQL.
-    `docker exec -it <CONTAINER_ID> bash` -> lanzamos una terminal de bash dentro del container.
-    `psql -U postgres -d postgres` -> nos conectamos al servicio de PSQL del container.
-    `\dt` -> comprobamos que la tabla "results" existe.
-    `SELECT * FROM results;` -> si queremos ver todas las entradas de la tabla.
-    `SELECT * FROM results ORDER BY id DESC LIMIT 1;` -> si queremos ver la última.
-    `SELECT * FROM results ORDER BY id DESC LIMIT 1; \watch 5` -> si queremos ver la última en tiempo real (tasa de refresco de 5 segundos).
+    - `docker ps` -> para obtener el ID del container de PostgreSQL.
+    - `docker exec -it <CONTAINER_ID> bash` -> lanzamos una terminal de bash dentro del container.
+    - `psql -U postgres -d postgres` -> nos conectamos al servicio de PSQL del container.
+    - `\dt` -> comprobamos que la tabla "results" existe.
+    - `SELECT * FROM results;` -> si queremos ver todas las entradas de la tabla.
+    - `SELECT * FROM results ORDER BY id DESC LIMIT 1;` -> si queremos ver la última.
+    - `SELECT * FROM results ORDER BY id DESC LIMIT 1; \watch 5` -> si queremos ver la última en tiempo real (tasa de refresco de 5 segundos).
 
 ## Comentarios adicionales
 
