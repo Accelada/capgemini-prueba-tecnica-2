@@ -1,9 +1,8 @@
 # capgemini-prueba-tecnica-2
 
-Autor: Adrián Celada
-Fecha: 01/07/2025
+- Autor: Adrián Celada
+- Fecha: 01/07/2025
 
-# Enunciado:
 ## Implementación de Arquitectura Pub/Sub
 Se requiere implementar una pequeña prueba basada en el patrón Publicador/Suscriptor (Pub/Sub) que cumpla con los siguientes requisitos:
 
@@ -39,7 +38,7 @@ Para lanzar la solución hay que seguir estos pasos:
 - Previamente, tener instalado Docker y el plug-in de Docker Compose en tu PC, en las versiones mencionadas arriba.
 
 - Lanzar el comando:
-    docker compose up --build
+    `docker compose up --build`
 
 - Docker Compose comenzará a generar las imágenes de los contenedores, así como la creación de redes y volúmenes definidos en los dockerfile. Al usar ese comando, también se inicia la ejecución de cada contenedor.
 
@@ -48,18 +47,18 @@ Para lanzar la solución hay que seguir estos pasos:
 Una vez lanzados los contededores, se puede evidenciar el funcionamiento de la aplicación de varias maneras:
 
 - Lanzar el siguiente comando para ver los contenedores en ejecución:
-    docker ps
+    `docker ps`
 
 - Ver los logs en terminal o en una interfaz gráfica como Docker Desktop (Windows).
 
 - Entrar en el container de PostgreSQL para ver si la tabla existe y los datos llegan realmente. Desde CMD:
-    docker ps -> para obtener el ID del container de PostgreSQL.
-    docker exec -it <CONTAINER_ID> bash -> lanzamos una terminal de bash dentro del container.
-    psql -U postgres -d postgres -> nos conectamos al servicio de PSQL del container.
-    \dt -> comprobamos que la tabla "results" existe.
-    SELECT * FROM results; -> si queremos ver todas las entradas de la tabla.
-    SELECT * FROM results ORDER BY id DESC LIMIT 1; -> si queremos ver la última.
-    SELECT * FROM results ORDER BY id DESC LIMIT 1; \watch 5 -> si queremos ver la última en tiempo real (tasa de refresco de 5 segundos).
+    `docker ps` -> para obtener el ID del container de PostgreSQL.
+    `docker exec -it <CONTAINER_ID> bash` -> lanzamos una terminal de bash dentro del container.
+    `psql -U postgres -d postgres` -> nos conectamos al servicio de PSQL del container.
+    `\dt` -> comprobamos que la tabla "results" existe.
+    `SELECT * FROM results;` -> si queremos ver todas las entradas de la tabla.
+    `SELECT * FROM results ORDER BY id DESC LIMIT 1;` -> si queremos ver la última.
+    `SELECT * FROM results ORDER BY id DESC LIMIT 1; \watch 5` -> si queremos ver la última en tiempo real (tasa de refresco de 5 segundos).
 
 ## Comentarios adicionales
 
@@ -69,6 +68,5 @@ El alcance de esta prueba es el de de un PoC para demostrar las capacidades de d
 - Creación de perfiles de usuario y cambio de contraseñas por defecto.
 - Gestión de los puertos de las aplicaciones.
 - Control de ciertos errores en las aplicaciones de publicación y suscripción.
-
 
 
