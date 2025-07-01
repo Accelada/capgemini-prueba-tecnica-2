@@ -10,11 +10,6 @@ services:
       volumes:
         - pgdata:/var/lib/postgresql/data
         - ./init.sql:/docker-entrypoint-initdb.d/init.sql
-      # healthcheck:
-      #   test: ["CMD-SHELL", "pg_isready -U postgres"]
-      #   interval: 10s
-      #   timeout: 5s
-      #   retries: 5
   
   mosquitto:
     image: eclipse-mosquitto:2.0
@@ -22,11 +17,6 @@ services:
       - "1883:1883"
     volumes:
       - ./mosquitto.conf:/mosquitto/config/mosquitto.conf
-    # healthcheck:
-    #   test: ["CMD", "mosquitto_sub", "-h", "localhost", "-t", "health", "-C", "1"]
-    #   interval: 10s
-    #   timeout: 5s
-    #   retries: 3
 
   publisher:
     build:
@@ -34,8 +24,6 @@ services:
       dockerfile: dockerfile.publisher
     depends_on:
       - mosquitto
-      # mosquitto:
-      #   condition: service_healthy
     environment:
       MQTT_BROKER: mosquitto
       MQTT_PORT: 1883
@@ -50,10 +38,6 @@ services:
     depends_on:
       - mosquitto
       - postgres
-      # mosquitto:
-      #   condition: service_healthy
-      # postgres:
-      #   condition: service_healthy
     environment:
       PG_HOST: postgres
       PG_DB: postgres
